@@ -85,7 +85,7 @@ impl <T> MulAssign<T> for Vector
 {
 	fn mul_assign(&mut self, val: T)
 	{
-		*self = *self * val.into();
+		*self = *self * val;
 	}
 }
 
