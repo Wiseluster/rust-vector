@@ -1,9 +1,10 @@
+pub mod vector;
 use vector::*;
 
 fn main()
 {
-	let a = Vector::at(3, 4, 2);
-	let b = Vector::at(5, -1, 0.5);
+	let a = Vector::at(3, 4, 0);
+	let b = Vector::at(5, -1, 2);
 
 	println!("a = {}", a);
 	println!("b = {}", b);

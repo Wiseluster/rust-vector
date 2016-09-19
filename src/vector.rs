@@ -72,9 +72,9 @@ impl <T> Mul<T> for Vector
 {
 	type Output = Vector;
 
-	fn mul(self, val: T) -> Vector
+	fn mul(self, value: T) -> Vector
 	{
-		let scale = val.into();
+		let scale = value.into();
 
 		Vector::at(self.x * scale, self.y * scale, self.z * scale)
 	}
@@ -83,9 +83,9 @@ impl <T> Mul<T> for Vector
 impl <T> MulAssign<T> for Vector
 	where T: Into<f64>
 {
-	fn mul_assign(&mut self, val: T)
+	fn mul_assign(&mut self, value: T)
 	{
-		*self = *self * val;
+		*self = *self * value;
 	}
 }
 
