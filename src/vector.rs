@@ -27,7 +27,7 @@ impl Add for Vector
 
 	fn add(self, other: Vector) -> Vector
 	{
-		Vector::at(self.x + other.x, self.y + other.y, self.z + other.z)
+		Vector {x: self.x + other.x, y: self.y + other.y, z: self.z + other.z}
 	}
 }
 
@@ -35,7 +35,9 @@ impl AddAssign for Vector
 {
 	fn add_assign(&mut self, other: Vector)
 	{
-		*self = *self + other;
+		self.x += other.x;
+		self.y += other.y;
+		self.z += other.z;
 	}
 }
 
@@ -45,7 +47,7 @@ impl Sub for Vector
 
 	fn sub(self, other: Vector) -> Vector
 	{
-		Vector::at(self.x - other.x, self.y - other.y, self.z - other.z)
+		Vector {x: self.x - other.x, y: self.y - other.y, z: self.z - other.z}
 	}
 }
 
@@ -53,7 +55,9 @@ impl SubAssign for Vector
 {
 	fn sub_assign(&mut self, other: Vector)
 	{
-		*self = *self - other;
+		self.x -= other.x;
+		self.y -= other.y;
+		self.z -= other.z;
 	}
 }
 
@@ -76,7 +80,7 @@ impl <T> Mul<T> for Vector
 	{
 		let scale = value.into();
 
-		Vector::at(self.x * scale, self.y * scale, self.z * scale)
+		Vector {x: self.x * scale, y: self.y * scale, z: self.z * scale}
 	}
 }
 
@@ -85,7 +89,11 @@ impl <T> MulAssign<T> for Vector
 {
 	fn mul_assign(&mut self, value: T)
 	{
-		*self = *self * value;
+		let scale = value.into();
+
+		self.x *= scale;
+		self.y *= scale;
+		self.z *= scale;
 	}
 }
 
@@ -95,7 +103,7 @@ impl Rem for Vector
 
 	fn rem(self, other: Vector) -> Vector
 	{
-		Vector::at(self.y * other.z - self.z * other.y, self.z * other.x - self.x * other.z, self.x * other.y - self.y * other.x)
+		Vector {x: self.y * other.z - self.z * other.y, y: self.z * other.x - self.x * other.z, z: self.x * other.y - self.y * other.x}
 	}
 }
 
@@ -103,7 +111,13 @@ impl RemAssign for Vector
 {
 	fn rem_assign(&mut self, other: Vector)
 	{
-		*self = *self % other;
+		let x = self.y * other.z - self.z * other.y;
+		let y = self.z * other.x - self.x * other.z;
+		let z = self.x * other.y - self.y * other.x;
+
+		self.x = x;
+		self.y = y;
+		self.z = z;
 	}
 }
 
@@ -113,7 +127,7 @@ impl Neg for Vector
 
 	fn neg(self) -> Vector
 	{
-		Vector::at(-self.x, -self.y, -self.z)
+		Vector {x: -self.x, y: -self.y, z: -self.z}
 	}
 }
 
@@ -123,14 +137,14 @@ impl Not for Vector
 
 	fn not(self) -> f64
 	{
-		(self * self).sqrt()
+		(self.x * other.x + self.y * other.y + self.z * other.z).sqrt()
 	}
 }
 
 impl Display for Vector
 {
-	fn fmt(&self, f: &mut Formatter) -> Result
+	fn fmt(&self, formatter: &mut Formatter) -> Result
 	{
-		write!(f, "({}, {}, {})", self.x, self.y, self.z)
+		write!(formatter, "({}, {}, {})", self.x, self.y, self.z)
 	}
 }
