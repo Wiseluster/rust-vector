@@ -1,2 +1,2 @@
 # rust-vector
-A simple vector (mathemetics) implementation in Rust.
+A simple vector (mathematics) implementation in Rust.
