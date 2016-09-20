@@ -137,7 +137,7 @@ impl Not for Vector
 
 	fn not(self) -> f64
 	{
-		(self.x * other.x + self.y * other.y + self.z * other.z).sqrt()
+		(self.x * self.x + self.y * self.y + self.z * self.z).sqrt()
 	}
 }
 
